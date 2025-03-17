@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"Vinnsla","l":"Floskur"},{"p":"org.example.floskur","l":"FloskurApplication"},{"p":"org.example.floskur","l":"FloskurController"}];updateSearchResults();
