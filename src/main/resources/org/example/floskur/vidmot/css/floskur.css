@@ -1,0 +1,11 @@
+.texti-red {
+-fx-border-color: red
+}
+
+.texti-green {
+-fx-border-color: green
+}
+
+.text-black {
+-fx.border-color: black
+}
