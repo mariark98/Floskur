@@ -5,7 +5,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="436.0" prefWidth="471.0" stylesheets="@vidmot/css/floskur.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.floskur.FloskurController">
+<AnchorPane prefHeight="500.0" prefWidth="500.0" stylesheets="@vidmot/css/floskur.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.floskur.FloskurController">
    <Label layoutX="14.0" layoutY="100.0" prefHeight="30.0" prefWidth="126.0" style="-fx-border-color:black" text="Dósir" />
    <TextField fx:id="fxDosir" layoutX="166.0" layoutY="102.0" onAction="#onDosir" prefHeight="26.0" prefWidth="126.0" promptText="Sláðu inn fjölda" />
    <Label fx:id="fxISKDosir" layoutX="330.0" layoutY="102.0" prefHeight="30.0" prefWidth="126.0" style="-fx-border-color: black;" text="0 " />

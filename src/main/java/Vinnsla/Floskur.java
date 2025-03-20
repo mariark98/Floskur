@@ -2,12 +2,12 @@ package Vinnsla;
 
 
 public class Floskur {
-    int ISKFloskur = 20;
-    int ISKDosir = 20;
-    int samtals = 0;
-    int samtalsVerd = 0;
-    int greida = 0;
-    int ISKGreida = 0;
+    private int ISKFloskur = 20;
+    private int ISKDosir = 20;
+    private int samtals = 0;
+    private int samtalsVerd = 0;
+    private int greida = 0;
+    private int ISKGreida = 0;
 
 
     public void setFjoldiFloskur(int floskur) {
