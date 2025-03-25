@@ -1,6 +1,7 @@
 package org.example.floskur;
 
 import Vinnsla.Floskur;
+import Vinnsla.FloskurVinnsla;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -23,11 +24,6 @@ public class FloskurController implements Initializable {
 
     private Floskur vinnslufloskur;
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        vinnslufloskur = new Floskur();
-    }
-
     public Label fxISKDosir;
     public Label fxISKFloskur;
     public Label fxSamtals;
@@ -37,6 +33,16 @@ public class FloskurController implements Initializable {
     public Label fxGreidaSamtals;
     public Label fxISKGreida;
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        vinnslufloskur = FloskurVinnsla.readFloskurData();
+        updateUI();
+    }
+
+    private void updateUI() {
+        fxGreidaSamtals.setText(Integer.toString(vinnslufloskur.getGreida()));
+        fxISKGreida.setText(Integer.toString(vinnslufloskur.getISKGreida()));
+    }
 
     /**
      * Meðhöndlar fjölda af dósum sem settar eru inn í kefið.

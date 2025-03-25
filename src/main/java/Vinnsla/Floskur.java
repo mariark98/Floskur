@@ -1,13 +1,18 @@
 package Vinnsla;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Floskur {
-    private int ISKFloskur = 20;
-    private int ISKDosir = 20;
-    private int samtals = 0;
-    private int samtalsVerd = 0;
-    private int greida = 0;
-    private int ISKGreida = 0;
+    @JsonProperty private int ISKFloskur;
+    @JsonProperty private int ISKDosir;
+    @JsonProperty private int samtals;
+    @JsonProperty private int samtalsVerd;
+    @JsonProperty private int greida;
+    @JsonProperty private int ISKGreida;
+
+
+    public Floskur(){}
 
 
     public void setFjoldiFloskur(int floskur) {
