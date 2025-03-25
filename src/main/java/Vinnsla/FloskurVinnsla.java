@@ -5,6 +5,9 @@ import java.io.File;
 import java.io.IOException;
 
 /**
+ * Les inn skrá sem heldur utan um gögn
+ * Uppfærir skrá þegar beðið er um uppfærslu
+ * Hreinsar gögn þegar beðið er um að hreinsa skrá
  * @author María Rún Karlsdóttir
  */
 public class FloskurVinnsla {
@@ -17,7 +20,7 @@ public class FloskurVinnsla {
             return objectMapper.readValue(new File(FILE_PATH), Floskur.class);
         } catch (IOException e) {
             e.printStackTrace();
-            return new Floskur(); // Return empty/default object on error
+            return new Floskur();
         }
     }
 
@@ -32,9 +35,16 @@ public class FloskurVinnsla {
     }
 
     public static void updateGreidaValues(int greida, int ISKGreida) {
-        Floskur data = readFloskurData(); // Load existing data
-        data.setGreida(greida);           // Update greida
-        data.setIskgreida(ISKGreida);     // Update ISKGreida
-        writeFloskurData(data);           // Save changes
+        Floskur data = readFloskurData();
+        data.setGreida(greida);
+        data.setIskgreida(ISKGreida);
+        writeFloskurData(data);
+    }
+
+    public static void clearGreidaValues() {
+        Floskur data = readFloskurData();
+        data.setGreida(0);
+        data.setIskgreida(0);
+        writeFloskurData(data);
     }
 }

@@ -5,10 +5,12 @@ import Vinnsla.FloskurVinnsla;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
@@ -20,7 +22,9 @@ import java.util.ResourceBundle;
  * @author María Rún Karlsdóttir mrk7@hi.is
  */
 
-public class FloskurController implements Initializable {
+public class FloskurController {
+
+
 
     private Floskur vinnslufloskur;
 
@@ -32,13 +36,42 @@ public class FloskurController implements Initializable {
     public TextField fxFloskur;
     public Label fxGreidaSamtals;
     public Label fxISKGreida;
+    public Button fxGreida;
+    public Button fxHreinsa;
+    public Button fxVista;
+    public Button fxHreinsaGogn;
+    public Label floskur;
+    public Label dosir;
+    public Label fxSamtalsTexti;
+    public Button fxTungumal;
+    private ResourceBundle fastar;
+    private Locale currentLocale = new Locale("is");
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    @FXML
+    public void initialize() {
+        loadLanguage();
         vinnslufloskur = FloskurVinnsla.readFloskurData();
         updateUI();
     }
 
+    private void loadLanguage() {
+        ResourceBundle bundle = ResourceBundle.getBundle("org.example.floskur.floskur", currentLocale);
+        floskur.setText(bundle.getString("label.floskur"));
+        dosir.setText(bundle.getString("label.dosir"));
+        fxSamtalsTexti.setText(bundle.getString("label.fxSamtalsTexti"));
+        fxTungumal.setText(bundle.getString("button.fxTungumal"));
+        fxHreinsa.setText(bundle.getString("button.fxHreinsa"));
+        fxGreida.setText(bundle.getString("button.fxGreida"));
+        fxVista.setText(bundle.getString("button.fxVista"));
+        fxHreinsaGogn.setText(bundle.getString("button.fxHreinsaGogn"));
+        fxDosir.setPromptText(bundle.getString("textField.fxDosir"));
+        fxFloskur.setPromptText(bundle.getString("textField.fxFloskur"));
+    }
+
+    /**
+     * Uppfærir viðmótið
+     * <p>Setur inn gögnin sem koma úr json skrá sem heldur utan um gögn</p>
+     */
     private void updateUI() {
         fxGreidaSamtals.setText(Integer.toString(vinnslufloskur.getGreida()));
         fxISKGreida.setText(Integer.toString(vinnslufloskur.getIskgreida()));
@@ -157,18 +190,36 @@ public class FloskurController implements Initializable {
         fxISKsamtals.setText("0");
     }
 
+    /**
+     * Færir gögn í skrá
+     * <p>Tekur gögnin sem er búið að setja inn og uppfærir json skrá
+     * sem heldur utan um gögn.</p>
+     * @param actionEvent
+     */
     @FXML
     private void onVista(ActionEvent actionEvent) {
         int greida = vinnslufloskur.getGreida();
         int ISKGreida = vinnslufloskur.getIskgreida();
 
         FloskurVinnsla.updateGreidaValues(greida, ISKGreida);
-        Floskur vinnslufloskur = FloskurVinnsla.readFloskurData(); // Reload updated data
-        updateUI();  // Refresh UI
+        Floskur vinnslufloskur = FloskurVinnsla.readFloskurData();
+        updateUI();
     }
 
+    /**
+     * Hreinsar gögn
+     * <p>Hreinsar öll gögn úr json skrá sem heldur utan um gögnin.</p>
+     * @param actionEvent
+     */
     public void onHreinsaGogn(ActionEvent actionEvent) {
+        FloskurVinnsla.clearGreidaValues();
+        vinnslufloskur = FloskurVinnsla.readFloskurData();
+        updateUI();
+    }
 
+    public void onTungumal(ActionEvent actionEvent) {
+        currentLocale = currentLocale.getLanguage().equals("is") ? new Locale("en") : new Locale("is");
+        loadLanguage(); // Reload UI texts
     }
 
 
