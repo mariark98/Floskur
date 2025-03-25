@@ -30,4 +30,11 @@ public class FloskurVinnsla {
             e.printStackTrace();
         }
     }
+
+    public static void updateGreidaValues(int greida, int ISKGreida) {
+        Floskur data = readFloskurData(); // Load existing data
+        data.setGreida(greida);           // Update greida
+        data.setIskgreida(ISKGreida);     // Update ISKGreida
+        writeFloskurData(data);           // Save changes
+    }
 }

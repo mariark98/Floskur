@@ -41,7 +41,7 @@ public class FloskurController implements Initializable {
 
     private void updateUI() {
         fxGreidaSamtals.setText(Integer.toString(vinnslufloskur.getGreida()));
-        fxISKGreida.setText(Integer.toString(vinnslufloskur.getISKGreida()));
+        fxISKGreida.setText(Integer.toString(vinnslufloskur.getIskgreida()));
     }
 
     /**
@@ -97,7 +97,7 @@ public class FloskurController implements Initializable {
             vinnslufloskur.setFjoldiFloskur(intFloskur);
             fxFloskur.getStyleClass().removeAll("texti-red"); // fjarlægja rauða styleClass
             fxFloskur.getStyleClass().add("texti-green");
-            int verdfloskur = vinnslufloskur.getISKFloskur() * intFloskur;
+            int verdfloskur = vinnslufloskur.getIskfloskur() * intFloskur;
             fxISKFloskur.setText(Integer.toString(verdfloskur));
             int samtals = vinnslufloskur.getSamtals();
             int samtalsVerd = vinnslufloskur.getSamtalsVerd();
@@ -145,7 +145,7 @@ public class FloskurController implements Initializable {
     @FXML
     protected void onGreida(ActionEvent actionEvent) {
         int greida = vinnslufloskur.getGreida();
-        int ISKGreida = vinnslufloskur.getISKGreida();
+        int ISKGreida = vinnslufloskur.getIskgreida();
         fxGreidaSamtals.setText(Integer.toString(greida));
         fxISKGreida.setText(Integer.toString(ISKGreida));
         vinnslufloskur.hreinsa();
@@ -157,8 +157,22 @@ public class FloskurController implements Initializable {
         fxISKsamtals.setText("0");
     }
 
+    @FXML
+    private void onVista(ActionEvent actionEvent) {
+        int greida = vinnslufloskur.getGreida();
+        int ISKGreida = vinnslufloskur.getIskgreida();
 
-     // public void onStafur(KeyEvent keyEvent) {
+        FloskurVinnsla.updateGreidaValues(greida, ISKGreida);
+        Floskur vinnslufloskur = FloskurVinnsla.readFloskurData(); // Reload updated data
+        updateUI();  // Refresh UI
+    }
+
+    public void onHreinsaGogn(ActionEvent actionEvent) {
+
+    }
+
+
+    // public void onStafur(KeyEvent keyEvent) {
         //fxFloskur.getStyleClass().removeAll("texti-red");
         //fxFloskur.getStyleClass().add("texti-black");
         //fxDosir.getStyleClass().removeAll("texti-red");

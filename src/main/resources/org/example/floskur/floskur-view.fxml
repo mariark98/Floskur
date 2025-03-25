@@ -19,7 +19,7 @@
    <Label fx:id="fxGreidaSamtals" layoutX="166.0" layoutY="211.0" prefHeight="30.0" prefWidth="126.0" style="-fx-border-color: black;" text="0" />
    <Label fx:id="fxISKGreida" layoutX="330.0" layoutY="211.0" prefHeight="30.0" prefWidth="126.0" style="-fx-border-color: black;" text="0 " />
    <Button fx:id="fxHreinsa" layoutX="22.0" layoutY="292.0" onAction="#onHreinsa" prefHeight="25.0" prefWidth="64.0" text="Hreinsa" />
-   <Button layoutX="343.0" layoutY="292.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="90.0" text="Vista gögn" />
-   <Button layoutX="343.0" layoutY="342.0" mnemonicParsing="false" text="Hreinsa gögn" />
+   <Button onAction="#onVista" layoutX="343.0" layoutY="292.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="90.0" text="Vista gögn" />
+   <Button onAction="#onHreinsaGogn" layoutX="343.0" layoutY="342.0" mnemonicParsing="false" text="Hreinsa gögn" />
 
 </AnchorPane>

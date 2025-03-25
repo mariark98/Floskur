@@ -4,12 +4,12 @@ package Vinnsla;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Floskur {
-    @JsonProperty private int ISKFloskur;
-    @JsonProperty private int ISKDosir;
+    @JsonProperty private int iskfloskur;
+    @JsonProperty private int iskdosir;
     @JsonProperty private int samtals;
     @JsonProperty private int samtalsVerd;
     @JsonProperty private int greida;
-    @JsonProperty private int ISKGreida;
+    @JsonProperty private int iskgreida;
 
 
     public Floskur(){}
@@ -19,8 +19,8 @@ public class Floskur {
         getSamtals(floskur, true);
     }
 
-    public int getISKFloskur() {
-        return ISKFloskur;
+    public int getIskfloskur() {
+        return iskfloskur;
     }
 
      public void setFjoldiDosir(int dosir) {
@@ -30,15 +30,15 @@ public class Floskur {
      public void getSamtals(int fjoldi, boolean floskur){
         samtals = fjoldi + samtals;
         if (floskur){
-            samtalsVerd = (fjoldi * ISKFloskur) + samtalsVerd;
+            samtalsVerd = (fjoldi * iskfloskur) + samtalsVerd;
         }
         else {
-            samtalsVerd = (fjoldi * ISKDosir) + samtalsVerd;
+            samtalsVerd = (fjoldi * iskdosir) + samtalsVerd;
         }
      }
 
     public int getISKDosir() {
-        return ISKDosir;
+        return iskdosir;
     }
 
     public void hreinsa() {
@@ -59,8 +59,17 @@ public class Floskur {
         return greida;
     }
 
-    public int getISKGreida() {
-        ISKGreida = ISKGreida + samtalsVerd;
-        return ISKGreida;
+    public int getIskgreida() {
+        iskgreida = iskgreida + samtalsVerd;
+        return iskgreida;
+    }
+
+    public void setGreida(int greida) {
+        this.greida = greida;
+    }
+
+
+    public void setIskgreida(int iskgreida) {
+        this.iskgreida = iskgreida;
     }
 }
