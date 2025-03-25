@@ -15,11 +15,12 @@
    <Label fx:id="fxSamtalsTexti" layoutX="14.0" layoutY="160.0" prefHeight="30.0" prefWidth="126.0" styleClass="text-size" text="Samtals" />
    <Label fx:id="fxSamtals" layoutX="166.0" layoutY="160.0" prefHeight="30.0" prefWidth="126.0" styleClass="text-size" text="0" />
    <Label fx:id="fxISKsamtals" layoutX="330.0" layoutY="160.0" prefHeight="30.0" prefWidth="126.0" styleClass="text-size" text="0" />
-   <Button fx:id="fxGreida" layoutX="140.0" layoutY="292.0" mnemonicParsing="false" onAction="#onGreida" prefHeight="25.0" prefWidth="64.0" styleClass="button-size" text="Greiða" />
+   <Button fx:id="fxGreida" layoutX="26.0" layoutY="293.0" mnemonicParsing="false" onAction="#onGreida" prefHeight="31.0" prefWidth="126.0" styleClass="button-size" text="Bæta við gögn" />
    <Label fx:id="fxGreidaSamtals" layoutX="166.0" layoutY="211.0" prefHeight="30.0" prefWidth="126.0" styleClass="text-size" text="0" />
    <Label fx:id="fxISKGreida" layoutX="330.0" layoutY="211.0" prefHeight="30.0" prefWidth="126.0" styleClass="text-size" text="0 " />
-   <Button fx:id="fxHreinsa" layoutX="31.0" layoutY="292.0" onAction="#onHreinsa" prefHeight="25.0" prefWidth="64.0" styleClass="button-size" text="Hreinsa" />
-   <Button fx:id="fxVista" layoutX="343.0" layoutY="292.0" mnemonicParsing="false" onAction="#onVista" prefHeight="26.0" prefWidth="90.0" styleClass="button-size" text="Vista gögn" />
-   <Button fx:id="fxHreinsaGogn" layoutX="343.0" layoutY="342.0" mnemonicParsing="false" onAction="#onHreinsaGogn" styleClass="button-size" text="Hreinsa gögn" />
-   <Button fx:id="fxTungumal" onAction="#onTungumal" layoutX="36.0" layoutY="404.0" mnemonicParsing="false" text="Íslenska/Enska" styleClass="button-size"/>
+   <Button fx:id="fxHreinsa" layoutX="26.0" layoutY="349.0" onAction="#onHreinsa" prefHeight="31.0" prefWidth="126.0" styleClass="button-size" text="Hreinsa" />
+   <Button fx:id="fxVista" layoutX="348.0" layoutY="293.0" mnemonicParsing="false" onAction="#onVista" prefHeight="31.0" prefWidth="91.0" styleClass="button-size" text="Vista gögn" />
+   <Button fx:id="fxHreinsaGogn" layoutX="347.0" layoutY="349.0" mnemonicParsing="false" onAction="#onHreinsaGogn" prefHeight="31.0" prefWidth="92.0" styleClass="button-size" text="Hreinsa gögn" />
+   <Button fx:id="fxTungumal" layoutX="199.0" layoutY="414.0" mnemonicParsing="false" onAction="#onTungumal" prefHeight="31.0" prefWidth="103.0" styleClass="button-size" text="Íslenska/Enska" />
+   <Label fx:id="fxVistudGogn" layoutX="14.0" layoutY="216.0" styleClass="text-size" text="Geymd gögn" />
 </AnchorPane>

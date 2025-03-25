@@ -6,10 +6,6 @@
 -fx-border-color: green
 }
 
-.text-black {
--fx.border-color: black
-}
-
 .text-size {
 -fx-font-size: 12pt;
 -fx-font-family: "Trebuchet MS", sans-serif

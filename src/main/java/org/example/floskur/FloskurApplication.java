@@ -13,7 +13,7 @@ public class FloskurApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(FloskurApplication.class.getResource("floskur-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 500, 500);
-        stage.setTitle("Flöskumóttaka");
+        stage.setTitle("Flöskumóttaka!");
         stage.setScene(scene);
         stage.show();
     }

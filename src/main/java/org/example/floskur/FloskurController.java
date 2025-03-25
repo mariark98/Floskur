@@ -4,12 +4,11 @@ import Vinnsla.Floskur;
 import Vinnsla.FloskurVinnsla;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-import java.net.URL;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -23,8 +22,6 @@ import java.util.ResourceBundle;
  */
 
 public class FloskurController {
-
-
 
     private Floskur vinnslufloskur;
 
@@ -44,17 +41,29 @@ public class FloskurController {
     public Label dosir;
     public Label fxSamtalsTexti;
     public Button fxTungumal;
-    private ResourceBundle fastar;
+    public Label fxVistudGogn;
     private Locale currentLocale = new Locale("is");
 
     @FXML
     public void initialize() {
-        loadLanguage();
-        vinnslufloskur = FloskurVinnsla.readFloskurData();
-        updateUI();
+        hladaTungumal(); // hlaðar inn viðmót fyrir tungumál
+        vinnslufloskur = FloskurVinnsla.lesaFloskurData(); // les json skránna
+        uppfaeraUI();
+
+        fxFloskur.textProperty().addListener((observable, oldValue, newValue) -> {
+            fxFloskur.getStyleClass().removeAll("texti-red"); // fjarlægja rauða styleClass
+        });
+
+        fxDosir.textProperty().addListener((observable, oldValue, newValue) -> {
+            fxDosir.getStyleClass().removeAll("texti-red"); // fjarlægja rauða styleClass
+        });
     }
 
-    private void loadLanguage() {
+    /**
+     * Breytir um tungumál
+     * <p>Tungumáli breytt og allur texti á tökkum og fleira breytt</p>
+     */
+    private void hladaTungumal() {
         ResourceBundle bundle = ResourceBundle.getBundle("org.example.floskur.floskur", currentLocale);
         floskur.setText(bundle.getString("label.floskur"));
         dosir.setText(bundle.getString("label.dosir"));
@@ -66,13 +75,14 @@ public class FloskurController {
         fxHreinsaGogn.setText(bundle.getString("button.fxHreinsaGogn"));
         fxDosir.setPromptText(bundle.getString("textField.fxDosir"));
         fxFloskur.setPromptText(bundle.getString("textField.fxFloskur"));
+        fxVistudGogn.setText(bundle.getString("label.fxVistudGogn"));
     }
 
     /**
      * Uppfærir viðmótið
      * <p>Setur inn gögnin sem koma úr json skrá sem heldur utan um gögn</p>
      */
-    private void updateUI() {
+    private void uppfaeraUI() {
         fxGreidaSamtals.setText(Integer.toString(vinnslufloskur.getGreida()));
         fxISKGreida.setText(Integer.toString(vinnslufloskur.getIskgreida()));
     }
@@ -161,10 +171,8 @@ public class FloskurController {
         fxISKFloskur.setText("0");
         fxSamtals.setText("0");
         fxISKsamtals.setText("0");
-        fxFloskur.getStyleClass().removeAll("text-green");
-        fxFloskur.getStyleClass().add("texti-black");
-        fxDosir.getStyleClass().removeAll("text-green");
-        fxDosir.getStyleClass().add("texti-black");
+        fxFloskur.getStyleClass().removeAll("texti-green", "texti-red");
+        fxDosir.getStyleClass().removeAll("texti-green", "texti-red");
     }
 
     /**
@@ -201,9 +209,9 @@ public class FloskurController {
         int greida = vinnslufloskur.getGreida();
         int ISKGreida = vinnslufloskur.getIskgreida();
 
-        FloskurVinnsla.updateGreidaValues(greida, ISKGreida);
-        Floskur vinnslufloskur = FloskurVinnsla.readFloskurData();
-        updateUI();
+        FloskurVinnsla.uppfaeraGreidaValues(greida, ISKGreida);
+        vinnslufloskur = FloskurVinnsla.lesaFloskurData();
+        uppfaeraUI();
     }
 
     /**
@@ -212,21 +220,19 @@ public class FloskurController {
      * @param actionEvent
      */
     public void onHreinsaGogn(ActionEvent actionEvent) {
-        FloskurVinnsla.clearGreidaValues();
-        vinnslufloskur = FloskurVinnsla.readFloskurData();
-        updateUI();
+        FloskurVinnsla.hreinsaGreidaValues();
+        vinnslufloskur = FloskurVinnsla.lesaFloskurData();
+        uppfaeraUI();
     }
 
+    /**
+     * Breytir tungumáli
+     * <p>Skoðar hvaða tungumál er sett og breytir tungumálinu
+     * Kallar svo á fall til að breyta öllum texta.</p>
+     * @param actionEvent
+     */
     public void onTungumal(ActionEvent actionEvent) {
         currentLocale = currentLocale.getLanguage().equals("is") ? new Locale("en") : new Locale("is");
-        loadLanguage(); // Reload UI texts
+        hladaTungumal();
     }
-
-
-    // public void onStafur(KeyEvent keyEvent) {
-        //fxFloskur.getStyleClass().removeAll("texti-red");
-        //fxFloskur.getStyleClass().add("texti-black");
-        //fxDosir.getStyleClass().removeAll("texti-red");
-        //fxDosir.getStyleClass().add("texti-black");
-    //}
 }
