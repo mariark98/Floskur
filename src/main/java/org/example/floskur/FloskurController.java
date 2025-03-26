@@ -2,7 +2,6 @@ package org.example.floskur;
 
 import Vinnsla.Floskur;
 import Vinnsla.FloskurVinnsla;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 import javafx.scene.control.Button;
@@ -73,7 +72,7 @@ public class FloskurController {
         fxGreida.setText(bundle.getString("button.fxGreida"));
         fxVista.setText(bundle.getString("button.fxVista"));
         fxHreinsaGogn.setText(bundle.getString("button.fxHreinsaGogn"));
-        fxDosir.setPromptText(bundle.getString("textField.fxDosir"));
+        fxDosir.setPromptText(bundle.getString("textField.fxFloskur"));
         fxFloskur.setPromptText(bundle.getString("textField.fxFloskur"));
         fxVistudGogn.setText(bundle.getString("label.fxVistudGogn"));
     }
@@ -92,11 +91,9 @@ public class FloskurController {
      *
      * <p>Athugar hvort fjöldinn sé löglegur. Reiknar út skilagjaldið og bætir því
      * við samtals fjölda af flöskum og dósum</p>
-     *
-     * @param actionEvent atburðurinn sem varð.
      */
     @FXML
-    protected void onDosir(ActionEvent actionEvent) {
+    protected void onDosir() {
         String dosir = fxDosir.getText();
 
         try {
@@ -125,12 +122,10 @@ public class FloskurController {
      *
      * <p>Athugar hvort fjöldinn sé löglegur. Reiknar út skilagjaldið og bætir því
      * við samtals fjölda af flöskum og dósum</p>
-     *
-     * @param actionEvent atburðurinn sem varð.
      */
 
     @FXML
-    protected void onFloskur(ActionEvent actionEvent) {
+    protected void onFloskur() {
         String floskur = fxFloskur.getText();
         try {
             int intFloskur = Integer.parseInt(floskur);
@@ -156,23 +151,13 @@ public class FloskurController {
     /**
      *  Hreinsar kefið.
      *
-     * <p>Hreinsar fjölda af flöskum og dósum sem voru settar inn ásakmt skilagjaldi.
+     * <p>Hreinsar fjölda af flöskum og dósum sem voru settar inn ásamt skilagjaldi.
      * Hreinsar einnig það sem var búið að bæta við í sameiginlegann fjölda og skilagjalds.</p>
-     *
-     * @param actionEvent atburðurinn sem varð.
      */
 
     @FXML
-    protected void onHreinsa(ActionEvent actionEvent){
-        vinnslufloskur.hreinsa();
-        fxDosir.setText("");
-        fxFloskur.setText("");
-        fxISKDosir.setText("0");
-        fxISKFloskur.setText("0");
-        fxSamtals.setText("0");
-        fxISKsamtals.setText("0");
-        fxFloskur.getStyleClass().removeAll("texti-green", "texti-red");
-        fxDosir.getStyleClass().removeAll("texti-green", "texti-red");
+    protected void onHreinsa(){
+        hreinsa();
     }
 
     /**
@@ -180,15 +165,21 @@ public class FloskurController {
      *
      * <p>Bætir sameiginlegum fjölda af flöskum og dósum, ásamt skilagjaldi við það sem
      * er búið að greiða fyrir. Hreinsar svo kerfið í leiðinni. </p>
-     *
-     * @param actionEvent atburðurinn sem varð.
      */
     @FXML
-    protected void onGreida(ActionEvent actionEvent) {
+    protected void onGreida() {
         int greida = vinnslufloskur.getGreida();
         int ISKGreida = vinnslufloskur.getIskgreida();
         fxGreidaSamtals.setText(Integer.toString(greida));
         fxISKGreida.setText(Integer.toString(ISKGreida));
+        vinnslufloskur.hreinsa();
+        hreinsa();
+    }
+
+    /**
+     * Endur stillir gildin
+     */
+    public void hreinsa(){
         vinnslufloskur.hreinsa();
         fxFloskur.setText("");
         fxDosir.setText("");
@@ -196,16 +187,17 @@ public class FloskurController {
         fxISKDosir.setText("0");
         fxSamtals.setText("0");
         fxISKsamtals.setText("0");
+        fxFloskur.getStyleClass().removeAll("texti-green", "texti-red");
+        fxDosir.getStyleClass().removeAll("texti-green", "texti-red");
     }
 
     /**
      * Færir gögn í skrá
      * <p>Tekur gögnin sem er búið að setja inn og uppfærir json skrá
      * sem heldur utan um gögn.</p>
-     * @param actionEvent
      */
     @FXML
-    private void onVista(ActionEvent actionEvent) {
+    private void onVista() {
         int greida = vinnslufloskur.getGreida();
         int ISKGreida = vinnslufloskur.getIskgreida();
 
@@ -217,9 +209,8 @@ public class FloskurController {
     /**
      * Hreinsar gögn
      * <p>Hreinsar öll gögn úr json skrá sem heldur utan um gögnin.</p>
-     * @param actionEvent
      */
-    public void onHreinsaGogn(ActionEvent actionEvent) {
+    public void onHreinsaGogn() {
         FloskurVinnsla.hreinsaGreidaValues();
         vinnslufloskur = FloskurVinnsla.lesaFloskurData();
         uppfaeraUI();
@@ -229,9 +220,8 @@ public class FloskurController {
      * Breytir tungumáli
      * <p>Skoðar hvaða tungumál er sett og breytir tungumálinu
      * Kallar svo á fall til að breyta öllum texta.</p>
-     * @param actionEvent
      */
-    public void onTungumal(ActionEvent actionEvent) {
+    public void onTungumal() {
         currentLocale = currentLocale.getLanguage().equals("is") ? new Locale("en") : new Locale("is");
         hladaTungumal();
     }

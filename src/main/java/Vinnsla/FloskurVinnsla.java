@@ -44,8 +44,8 @@ public class FloskurVinnsla {
      * Uppfærir gildið á greiða - uppfærir skránna
      * <p>Setur nýtt gjald fyrir greiða og skilagkald,
      * uppfæriri það sem er búið að setja í kerfið.</p>
-     * @param greida
-     * @param ISKGreida
+     * @param greida fjöldi sem á að vista
+     * @param ISKGreida skilagjald  sem á að vista
      */
     public static void uppfaeraGreidaValues(int greida, int ISKGreida) {
         Floskur data = lesaFloskurData();
