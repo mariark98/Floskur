@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"m":"org.example.floskur","l":"org.example.floskur"},{"m":"org.example.floskur","l":"Vinnsla"}];updateSearchResults();
