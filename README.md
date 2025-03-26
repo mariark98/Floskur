@@ -1,3 +1,5 @@
+# Floskur
+
 Flöskur er verkefni gert í áfanga Viðmótsforritun vorið 2025. 
 Verkefnið tekur við fjölda af flöskum og dósum og reiknar skilagjald fyrir notanda. 
 
