@@ -64,4 +64,24 @@ public class FloskurVinnsla {
         data.setIskgreida(0);
         skrifaFloskurData(data);
     }
+
+    /**
+     * Breytir skilagjaldi fyrir Dósir
+     * @param newIskDosir nýtt skilagjald
+     */
+    public static void breytaIskDosir(int newIskDosir){
+        Floskur data = lesaFloskurData();
+        data.setiskDosir(newIskDosir);
+        skrifaFloskurData(data);
+    }
+
+    /**
+     * Breytir skilagjaldi fyrir Flöskur
+     * @param newIskFloskur nýtt skilagjald
+     */
+    public static void breytaIskFloskur(int newIskFloskur){
+        Floskur data = lesaFloskurData();
+        data.setiskFloskur(newIskFloskur);
+        skrifaFloskurData(data);
+    }
 }

@@ -4,9 +4,8 @@ import Vinnsla.Floskur;
 import Vinnsla.FloskurVinnsla;
 import javafx.fxml.FXML;
 
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -41,6 +40,7 @@ public class FloskurController {
     public Label fxSamtalsTexti;
     public Button fxTungumal;
     public Label fxVistudGogn;
+    public Button fxSkilagjald;
     private Locale currentLocale = new Locale("is");
 
     @FXML
@@ -75,6 +75,7 @@ public class FloskurController {
         fxDosir.setPromptText(bundle.getString("textField.fxFloskur"));
         fxFloskur.setPromptText(bundle.getString("textField.fxFloskur"));
         fxVistudGogn.setText(bundle.getString("label.fxVistudGogn"));
+        fxSkilagjald.setText(bundle.getString("button.fxSkilagjald"));
     }
 
     /**
@@ -224,5 +225,68 @@ public class FloskurController {
     public void onTungumal() {
         currentLocale = currentLocale.getLanguage().equals("is") ? new Locale("en") : new Locale("is");
         hladaTungumal();
+    }
+
+    /**
+     * Breyta skilagjaldi
+     * <p>Opnar Dialog glugga þar sem hægt er að setja inn nýtt skilagjald.
+     * Leyfir notanda að velja á milli hvort sem það er verið að breyta skilagjaldi
+     * hjá dósum eða flöskur.</p>
+     *
+     */
+    public void breytaSkilagjaldi() {
+        ResourceBundle bundle = ResourceBundle.getBundle("org.example.floskur.floskur", currentLocale);
+
+        Dialog<ButtonType> skilagjaldDialog = new Dialog<>();
+        skilagjaldDialog.setTitle(bundle.getString("skilagjaldTitle"));
+
+        ChoiceBox<String> choiceBox = new ChoiceBox<>();
+        choiceBox.getItems().addAll(
+                bundle.getString("label.floskur"),
+                bundle.getString("label.dosir")
+        );
+        choiceBox.getSelectionModel().selectFirst();
+
+        TextField valueField = new TextField();
+        valueField.setPromptText("ISK kr");
+
+        VBox content = new VBox(10);
+        content.getChildren().addAll(choiceBox, valueField);
+        skilagjaldDialog.getDialogPane().setContent(content);
+
+        // Add buttons
+        skilagjaldDialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+
+        skilagjaldDialog.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                try {
+                    int newValue = Integer.parseInt(valueField.getText());
+                    if (newValue < 0 || newValue >= 1000) {
+                        synaVilluskilabod(bundle.getString("ekkitolustafur"));
+                        return;
+                    }
+
+                    if (choiceBox.getValue().equals(bundle.getString("label.floskur"))) {
+                        FloskurVinnsla.breytaIskFloskur(newValue);
+                    } else {
+                        FloskurVinnsla.breytaIskDosir(newValue);
+                    }
+                    vinnslufloskur = FloskurVinnsla.lesaFloskurData();
+
+                } catch (NumberFormatException e) {
+                    synaVilluskilabod(bundle.getString("ekkitolustafur"));
+                }
+            }
+        });
+    }
+
+    /**
+     * Gefur skilaboð um að það sé rangt inntak.
+     */
+    private void synaVilluskilabod(String errorMessage) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText(null);
+        alert.setContentText(errorMessage);
+        alert.showAndWait();
     }
 }

@@ -6,21 +6,22 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane prefHeight="500.0" prefWidth="500.0" stylesheets="@vidmot/css/floskur.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.floskur.FloskurController">
-   <Label fx:id="dosir" layoutX="14.0" layoutY="100.0" prefHeight="30.0" prefWidth="126.0" styleClass="text-size" text="Dósir" />
-   <TextField fx:id="fxDosir" layoutX="152.0" layoutY="102.0" onAction="#onDosir" prefHeight="26.0" prefWidth="126.0" promptText="Sláðu inn fjölda" styleClass="button-size" />
-   <Label fx:id="fxISKDosir" layoutX="330.0" layoutY="102.0" prefHeight="30.0" prefWidth="126.0" styleClass="text-size" text="0 " />
-   <Label fx:id="floskur" layoutX="14.0" layoutY="50.0" prefHeight="30.0" prefWidth="126.0" styleClass="text-size" text="Flöskur" />
-   <TextField fx:id="fxFloskur" layoutX="152.0" layoutY="50.0" onAction="#onFloskur" prefHeight="26.0" prefWidth="126.0" promptText="Sláðu inn fjölda" styleClass="button-size" />
-   <Label fx:id="fxISKFloskur" layoutX="330.0" layoutY="48.0" prefHeight="30.0" prefWidth="126.0" styleClass="text-size" text="0" />
-   <Label fx:id="fxSamtalsTexti" layoutX="14.0" layoutY="160.0" prefHeight="30.0" prefWidth="126.0" styleClass="text-size" text="Samtals" />
-   <Label fx:id="fxSamtals" layoutX="152.0" layoutY="160.0" prefHeight="30.0" prefWidth="126.0" styleClass="text-size" text="0" />
-   <Label fx:id="fxISKsamtals" layoutX="330.0" layoutY="160.0" prefHeight="30.0" prefWidth="126.0" styleClass="text-size" text="0" />
-   <Button fx:id="fxGreida" layoutX="26.0" layoutY="293.0" mnemonicParsing="false" onAction="#onGreida" prefHeight="31.0" prefWidth="126.0" styleClass="button-size" text="Bæta við gögn" />
-   <Label fx:id="fxGreidaSamtals" layoutX="152.0" layoutY="211.0" prefHeight="30.0" prefWidth="126.0" styleClass="text-size" text="0" />
-   <Label fx:id="fxISKGreida" layoutX="330.0" layoutY="211.0" prefHeight="30.0" prefWidth="126.0" styleClass="text-size" text="0 " />
-   <Button fx:id="fxHreinsa" layoutX="26.0" layoutY="349.0" onAction="#onHreinsa" prefHeight="31.0" prefWidth="126.0" styleClass="button-size" text="Hreinsa" />
-   <Button fx:id="fxVista" layoutX="348.0" layoutY="293.0" mnemonicParsing="false" onAction="#onVista" prefHeight="31.0" prefWidth="91.0" styleClass="button-size" text="Vista gögn" />
-   <Button fx:id="fxHreinsaGogn" layoutX="347.0" layoutY="349.0" mnemonicParsing="false" onAction="#onHreinsaGogn" prefHeight="31.0" prefWidth="92.0" styleClass="button-size" text="Hreinsa gögn" />
-   <Button fx:id="fxTungumal" layoutX="199.0" layoutY="414.0" mnemonicParsing="false" onAction="#onTungumal" prefHeight="31.0" prefWidth="103.0" styleClass="button-size" text="Íslenska/Enska" />
-   <Label fx:id="fxVistudGogn" layoutX="14.0" layoutY="216.0" styleClass="text-size" text="Geymd gögn" />
+   <Label fx:id="dosir" layoutX="14.0" layoutY="165.0" prefHeight="30.0" prefWidth="126.0" styleClass="text-size" text="Dósir" />
+   <TextField fx:id="fxDosir" layoutX="152.0" layoutY="167.0" onAction="#onDosir" prefHeight="26.0" prefWidth="126.0" promptText="Sláðu inn fjölda" styleClass="button-size" />
+   <Label fx:id="fxISKDosir" layoutX="330.0" layoutY="167.0" prefHeight="30.0" prefWidth="126.0" styleClass="text-size" text="0 " />
+   <Label fx:id="floskur" layoutX="14.0" layoutY="115.0" prefHeight="30.0" prefWidth="126.0" styleClass="text-size" text="Flöskur" />
+   <TextField fx:id="fxFloskur" layoutX="152.0" layoutY="115.0" onAction="#onFloskur" prefHeight="26.0" prefWidth="126.0" promptText="Sláðu inn fjölda" styleClass="button-size" />
+   <Label fx:id="fxISKFloskur" layoutX="330.0" layoutY="113.0" prefHeight="30.0" prefWidth="126.0" styleClass="text-size" text="0" />
+   <Label fx:id="fxSamtalsTexti" layoutX="14.0" layoutY="225.0" prefHeight="30.0" prefWidth="126.0" styleClass="text-size" text="Samtals" />
+   <Label fx:id="fxSamtals" layoutX="152.0" layoutY="225.0" prefHeight="30.0" prefWidth="126.0" styleClass="text-size" text="0" />
+   <Label fx:id="fxISKsamtals" layoutX="330.0" layoutY="225.0" prefHeight="30.0" prefWidth="126.0" styleClass="text-size" text="0" />
+   <Button fx:id="fxGreida" layoutX="26.0" layoutY="358.0" mnemonicParsing="false" onAction="#onGreida" prefHeight="31.0" prefWidth="126.0" styleClass="button-size" text="Bæta við gögn" />
+   <Label fx:id="fxGreidaSamtals" layoutX="152.0" layoutY="276.0" prefHeight="30.0" prefWidth="126.0" styleClass="text-size" text="0" />
+   <Label fx:id="fxISKGreida" layoutX="330.0" layoutY="276.0" prefHeight="30.0" prefWidth="126.0" styleClass="text-size" text="0 " />
+   <Button fx:id="fxHreinsa" layoutX="26.0" layoutY="414.0" onAction="#onHreinsa" prefHeight="31.0" prefWidth="126.0" styleClass="button-size" text="Hreinsa" />
+   <Button fx:id="fxVista" layoutX="348.0" layoutY="358.0" mnemonicParsing="false" onAction="#onVista" prefHeight="31.0" prefWidth="91.0" styleClass="button-size" text="Vista gögn" />
+   <Button fx:id="fxHreinsaGogn" layoutX="347.0" layoutY="414.0" mnemonicParsing="false" onAction="#onHreinsaGogn" prefHeight="31.0" prefWidth="92.0" styleClass="button-size" text="Hreinsa gögn" />
+   <Button fx:id="fxTungumal" layoutX="51.0" layoutY="38.0" mnemonicParsing="false" onAction="#onTungumal" prefHeight="31.0" prefWidth="103.0" styleClass="button-size" text="Íslenska/Enska" />
+   <Label fx:id="fxVistudGogn" layoutX="14.0" layoutY="281.0" styleClass="text-size" text="Geymd gögn" />
+   <Button fx:id="fxSkilagjald" layoutX="335.0" layoutY="38.0" mnemonicParsing="false" onAction="#breytaSkilagjaldi" prefHeight="31.0" styleClass="button-size" text="Breyta skilagjaldi" />
 </AnchorPane>

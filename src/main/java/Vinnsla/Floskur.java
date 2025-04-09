@@ -72,4 +72,12 @@ public class Floskur {
     public void setIskgreida(int iskgreida) {
         this.iskgreida = iskgreida;
     }
+
+    public void setiskFloskur(int newIskFloskur) {
+        iskfloskur = newIskFloskur;
+    }
+
+    public void setiskDosir(int newIskDosir){
+        iskdosir = newIskDosir;
+    }
 }
