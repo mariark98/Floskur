@@ -98,7 +98,7 @@ public class FloskurController {
 
         try {
             int intDosir = Integer.parseInt(dosir);
-            if (intDosir < 0) {
+            if (intDosir < 0 || intDosir >= 10000) {
                 throw new IllegalArgumentException();
             }
             vinnslufloskur.setFjoldiDosir(intDosir);
@@ -129,7 +129,7 @@ public class FloskurController {
         String floskur = fxFloskur.getText();
         try {
             int intFloskur = Integer.parseInt(floskur);
-            if (intFloskur < 0) {
+            if (intFloskur < 0 || intFloskur >= 10000){
                 throw new IllegalArgumentException();
             }
             vinnslufloskur.setFjoldiFloskur(intFloskur);
