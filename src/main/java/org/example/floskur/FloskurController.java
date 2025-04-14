@@ -47,16 +47,16 @@ public class FloskurController {
 
     @FXML
     public void initialize() {
-        hladaTungumal(); // hlaðar inn viðmót fyrir tungumál
-        vinnslufloskur = FloskurVinnsla.lesaFloskurData(); // les json skránna
+        hladaTungumal();
+        vinnslufloskur = FloskurVinnsla.lesaFloskurData();
         uppfaeraUI();
 
         fxFloskur.textProperty().addListener((observable, oldValue, newValue) -> {
-            fxFloskur.getStyleClass().removeAll("texti-red"); // fjarlægja rauða styleClass
+            fxFloskur.getStyleClass().removeAll("texti-red");
         });
 
         fxDosir.textProperty().addListener((observable, oldValue, newValue) -> {
-            fxDosir.getStyleClass().removeAll("texti-red"); // fjarlægja rauða styleClass
+            fxDosir.getStyleClass().removeAll("texti-red");
         });
     }
 
@@ -105,7 +105,7 @@ public class FloskurController {
                 throw new IllegalArgumentException();
             }
             vinnslufloskur.baetaVidDosirogGjald(intDosir);
-            fxDosir.getStyleClass().removeAll("texti-red"); // fjarlægja rauða styleClass
+            fxDosir.getStyleClass().removeAll("texti-red");
             fxDosir.getStyleClass().add("texti-green");
             int verddosir = vinnslufloskur.getISKDosir() * intDosir;
             fxISKDosir.setText(Integer.toString(verddosir));
@@ -136,7 +136,7 @@ public class FloskurController {
                 throw new IllegalArgumentException();
             }
             vinnslufloskur.baetaVidFloskurogGjald(intFloskur);
-            fxFloskur.getStyleClass().removeAll("texti-red"); // fjarlægja rauða styleClass
+            fxFloskur.getStyleClass().removeAll("texti-red");
             fxFloskur.getStyleClass().add("texti-green");
             int verdfloskur = vinnslufloskur.getIskfloskur() * intFloskur;
             fxISKFloskur.setText(Integer.toString(verdfloskur));
@@ -176,7 +176,6 @@ public class FloskurController {
         int ISKGreida = vinnslufloskur.getIskgreida();
         fxGreidaSamtals.setText(Integer.toString(greida));
         fxISKGreida.setText(Integer.toString(ISKGreida));
-        vinnslufloskur.hreinsa();
         hreinsa();
     }
 
@@ -246,18 +245,18 @@ public class FloskurController {
         Dialog<ButtonType> skilagjaldDialog = new Dialog<>();
         skilagjaldDialog.setTitle(bundle.getString("skilagjaldTitle"));
 
-        ChoiceBox<String> choiceBox = new ChoiceBox<>();
-        choiceBox.getItems().addAll(
+        ChoiceBox<String> valBox = new ChoiceBox<>();
+        valBox.getItems().addAll(
                 bundle.getString("label.floskur"),
                 bundle.getString("label.dosir")
         );
-        choiceBox.getSelectionModel().selectFirst();
+        valBox.getSelectionModel().selectFirst();
 
         Label currentValueLabel = new Label();
         int currentValue = FloskurVinnsla.lesaFloskurData().getIskfloskur();
         currentValueLabel.setText(bundle.getString("nuverandiGildi") + ": " + currentValue + " ISK");
 
-        choiceBox.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+        valBox.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             int value = newVal.equals(bundle.getString("label.floskur")) ?
                     FloskurVinnsla.lesaFloskurData().getIskfloskur() :
                     FloskurVinnsla.lesaFloskurData().getISKDosir();
@@ -268,7 +267,7 @@ public class FloskurController {
         valueField.setPromptText("ISK");
 
         VBox content = new VBox(10);
-        content.getChildren().addAll(choiceBox, currentValueLabel, valueField);
+        content.getChildren().addAll(valBox, currentValueLabel, valueField);
         skilagjaldDialog.getDialogPane().setContent(content);
 
         skilagjaldDialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
@@ -288,7 +287,7 @@ public class FloskurController {
                         return;
                     }
 
-                    if (choiceBox.getValue().equals(bundle.getString("label.floskur"))) {
+                    if (valBox.getValue().equals(bundle.getString("label.floskur"))) {
                         FloskurVinnsla.breytaIskFloskur(newValue);
                     } else {
                         FloskurVinnsla.breytaIskDosir(newValue);

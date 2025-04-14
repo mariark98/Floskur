@@ -25,6 +25,9 @@ public class Floskur {
         return iskdosir;
     }
 
+    /**
+     * Hreinsar gildin fyrir samtals dósir og flöskur ásamt skilagildinu.
+     */
     public void hreinsa() {
         this.samtals = 0;
         this.samtalsVerd = 0;
@@ -46,6 +49,9 @@ public class Floskur {
         return iskgreida;
     }
 
+    /**
+     * Reiknar nýtt gildi fyrir gildin sem eiga að fara í skránna.
+     */
     public void baetaVidGreida() {
         greida += samtals;
         iskgreida += samtalsVerd;
@@ -83,20 +89,36 @@ public class Floskur {
         dosir = fjoldi;
     }
 
+    /**
+     * Bætir við fjölda af flöskum
+     * @param fjoldi af dósum sem voru sett í kerfið
+     */
     public void baetaVidFloskur(int fjoldi){
         this.floskur += fjoldi;
     }
 
+    /**
+     * Bætir við fjölda dósa
+     * @param fjoldi dósa sem voru sett í kerfið
+     */
     public void baetaVidDosir(int fjoldi){
         this.dosir += fjoldi;
     }
 
+    /**
+     * Reiknar nýtt gildi fyrir samtals fjölda og skilagildi.
+     * @param fjoldi dósa sem voru sett inn í kerfið
+     */
     public void baetaVidDosirogGjald(int fjoldi) {
         baetaVidDosir(fjoldi);
         this.samtals += fjoldi;
         this.samtalsVerd += fjoldi * iskdosir;
     }
 
+    /**
+     * Reiknar nýtt gildi fyrir samtals fjölda og skilagildi
+     * @param fjoldi af flöskum sem voru sett inn í kerfið
+     */
     public void baetaVidFloskurogGjald(int fjoldi) {
         baetaVidFloskur(fjoldi);
         this.samtals += fjoldi;
