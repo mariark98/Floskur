@@ -62,6 +62,8 @@ public class FloskurVinnsla {
         Floskur data = lesaFloskurData();
         data.setGreida(0);
         data.setIskgreida(0);
+        data.setDosir(0);
+        data.setFloskur(0);
         skrifaFloskurData(data);
     }
 
@@ -82,6 +84,20 @@ public class FloskurVinnsla {
     public static void breytaIskFloskur(int newIskFloskur){
         Floskur data = lesaFloskurData();
         data.setiskFloskur(newIskFloskur);
+        skrifaFloskurData(data);
+    }
+
+    /**
+     * Breytir fjölda af flöskum og dósum í Json skránni
+     * @param floskur nýr fjöldi
+     * @param dosir nýr fjöldi
+     */
+    public static void  breytaFloskurDosir(int greida, int ISKGreida, int floskur, int dosir){
+        Floskur data = lesaFloskurData();
+        data.setGreida(greida);
+        data.setIskgreida(ISKGreida);
+        data.setFloskur(floskur);
+        data.setDosir(dosir);
         skrifaFloskurData(data);
     }
 }

@@ -4,6 +4,7 @@ import Vinnsla.Floskur;
 import Vinnsla.FloskurVinnsla;
 import javafx.fxml.FXML;
 
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 
@@ -20,6 +21,7 @@ import java.util.ResourceBundle;
  */
 
 public class FloskurController {
+
 
     private Floskur vinnslufloskur;
 
@@ -102,7 +104,7 @@ public class FloskurController {
             if (intDosir < 0 || intDosir >= 10000) {
                 throw new IllegalArgumentException();
             }
-            vinnslufloskur.setFjoldiDosir(intDosir);
+            vinnslufloskur.baetaVidDosirogGjald(intDosir);
             fxDosir.getStyleClass().removeAll("texti-red"); // fjarlægja rauða styleClass
             fxDosir.getStyleClass().add("texti-green");
             int verddosir = vinnslufloskur.getISKDosir() * intDosir;
@@ -133,7 +135,7 @@ public class FloskurController {
             if (intFloskur < 0 || intFloskur >= 10000){
                 throw new IllegalArgumentException();
             }
-            vinnslufloskur.setFjoldiFloskur(intFloskur);
+            vinnslufloskur.baetaVidFloskurogGjald(intFloskur);
             fxFloskur.getStyleClass().removeAll("texti-red"); // fjarlægja rauða styleClass
             fxFloskur.getStyleClass().add("texti-green");
             int verdfloskur = vinnslufloskur.getIskfloskur() * intFloskur;
@@ -169,6 +171,7 @@ public class FloskurController {
      */
     @FXML
     protected void onGreida() {
+        vinnslufloskur.baetaVidGreida();
         int greida = vinnslufloskur.getGreida();
         int ISKGreida = vinnslufloskur.getIskgreida();
         fxGreidaSamtals.setText(Integer.toString(greida));
@@ -199,10 +202,13 @@ public class FloskurController {
      */
     @FXML
     private void onVista() {
+        vinnslufloskur.baetaVidGreida();
         int greida = vinnslufloskur.getGreida();
         int ISKGreida = vinnslufloskur.getIskgreida();
+        int dosir = vinnslufloskur.getDosir();
+        int floskur = vinnslufloskur.getFloskur();
 
-        FloskurVinnsla.uppfaeraGreidaValues(greida, ISKGreida);
+        FloskurVinnsla.breytaFloskurDosir(greida, ISKGreida, floskur,dosir);
         vinnslufloskur = FloskurVinnsla.lesaFloskurData();
         uppfaeraUI();
     }
@@ -247,15 +253,31 @@ public class FloskurController {
         );
         choiceBox.getSelectionModel().selectFirst();
 
+        Label currentValueLabel = new Label();
+        int currentValue = FloskurVinnsla.lesaFloskurData().getIskfloskur();
+        currentValueLabel.setText(bundle.getString("nuverandiGildi") + ": " + currentValue + " ISK");
+
+        choiceBox.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+            int value = newVal.equals(bundle.getString("label.floskur")) ?
+                    FloskurVinnsla.lesaFloskurData().getIskfloskur() :
+                    FloskurVinnsla.lesaFloskurData().getISKDosir();
+            currentValueLabel.setText(bundle.getString("nuverandiGildi") + ": " + value + " ISK");
+        });
+
         TextField valueField = new TextField();
-        valueField.setPromptText("ISK kr");
+        valueField.setPromptText("ISK");
 
         VBox content = new VBox(10);
-        content.getChildren().addAll(choiceBox, valueField);
+        content.getChildren().addAll(choiceBox, currentValueLabel, valueField);
         skilagjaldDialog.getDialogPane().setContent(content);
 
-        // Add buttons
         skilagjaldDialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+        Node okButton = skilagjaldDialog.getDialogPane().lookupButton(ButtonType.OK);
+        okButton.setDisable(true);
+
+        valueField.textProperty().addListener((obs, oldText, newText) -> {
+            okButton.setDisable(newText.trim().isEmpty());
+        });
 
         skilagjaldDialog.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
@@ -272,7 +294,8 @@ public class FloskurController {
                         FloskurVinnsla.breytaIskDosir(newValue);
                     }
                     vinnslufloskur = FloskurVinnsla.lesaFloskurData();
-
+                    endurreiknaSkilagjald();
+                    uppfaeraUI();
                 } catch (NumberFormatException e) {
                     synaVilluskilabod(bundle.getString("ekkitolustafur"));
                 }
@@ -288,5 +311,25 @@ public class FloskurController {
         alert.setHeaderText(null);
         alert.setContentText(errorMessage);
         alert.showAndWait();
+    }
+
+    /**
+     * Endur reiknar skilagjald eftir að skilagjaldi hefur verið breytt.
+     */
+    private void endurreiknaSkilagjald(){
+        int dosir = vinnslufloskur.getDosir();
+        int floskur = vinnslufloskur.getFloskur();
+
+        int verdDosir = dosir * vinnslufloskur.getISKDosir();
+        int verdFloskur = floskur * vinnslufloskur.getIskfloskur();
+        vinnslufloskur.setIskgreida(verdDosir+verdFloskur);
+        int iskgreida = vinnslufloskur.getIskgreida();
+        fxISKGreida.setText(Integer.toString(iskgreida));
+        int greida = vinnslufloskur.getGreida();
+
+        FloskurVinnsla.uppfaeraGreidaValues(greida, iskgreida);
+        vinnslufloskur = FloskurVinnsla.lesaFloskurData();
+        uppfaeraUI();
+
     }
 }

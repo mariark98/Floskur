@@ -10,40 +10,24 @@ public class Floskur {
     @JsonProperty private int samtalsVerd;
     @JsonProperty private int greida;
     @JsonProperty private int iskgreida;
+    @JsonProperty private int floskur;
+    @JsonProperty private int dosir;
 
 
     public Floskur(){}
 
 
-    public void setFjoldiFloskur(int floskur) {
-        getSamtals(floskur, true);
-    }
-
     public int getIskfloskur() {
         return iskfloskur;
     }
-
-     public void setFjoldiDosir(int dosir) {
-        getSamtals(dosir, false);
-     }
-
-     public void getSamtals(int fjoldi, boolean floskur){
-        samtals = fjoldi + samtals;
-        if (floskur){
-            samtalsVerd = (fjoldi * iskfloskur) + samtalsVerd;
-        }
-        else {
-            samtalsVerd = (fjoldi * iskdosir) + samtalsVerd;
-        }
-     }
 
     public int getISKDosir() {
         return iskdosir;
     }
 
     public void hreinsa() {
-        samtals = 0;
-        samtalsVerd = 0;
+        this.samtals = 0;
+        this.samtalsVerd = 0;
     }
 
     public int getSamtals() {
@@ -55,19 +39,21 @@ public class Floskur {
     }
 
     public int getGreida() {
-        greida = greida + samtals;
         return greida;
     }
 
     public int getIskgreida() {
-        iskgreida = iskgreida + samtalsVerd;
         return iskgreida;
+    }
+
+    public void baetaVidGreida() {
+        greida += samtals;
+        iskgreida += samtalsVerd;
     }
 
     public void setGreida(int greida) {
         this.greida = greida;
     }
-
 
     public void setIskgreida(int iskgreida) {
         this.iskgreida = iskgreida;
@@ -79,5 +65,41 @@ public class Floskur {
 
     public void setiskDosir(int newIskDosir){
         iskdosir = newIskDosir;
+    }
+
+    public int getDosir(){
+        return dosir;
+    }
+
+    public int getFloskur(){
+        return floskur;
+    }
+
+    public void setFloskur(int fjoldi){
+        floskur = fjoldi;
+    }
+
+    public void setDosir(int fjoldi){
+        dosir = fjoldi;
+    }
+
+    public void baetaVidFloskur(int fjoldi){
+        this.floskur += fjoldi;
+    }
+
+    public void baetaVidDosir(int fjoldi){
+        this.dosir += fjoldi;
+    }
+
+    public void baetaVidDosirogGjald(int fjoldi) {
+        baetaVidDosir(fjoldi);
+        this.samtals += fjoldi;
+        this.samtalsVerd += fjoldi * iskdosir;
+    }
+
+    public void baetaVidFloskurogGjald(int fjoldi) {
+        baetaVidFloskur(fjoldi);
+        this.samtals += fjoldi;
+        this.samtalsVerd += fjoldi * iskfloskur;
     }
 }
